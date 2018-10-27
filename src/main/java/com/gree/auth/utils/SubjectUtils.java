@@ -33,7 +33,7 @@ public class SubjectUtils {
     public static void login(HttpServletResponse response, HttpServletRequest request) {
         String randomString = SubjectUtils.getRandomString();
         CookieUtils.addCookie(response, ConstantEum.LOGIN_TOKEN.getString(), randomString,
-                "localhost", 3600, false);
+                ConfigUtils.getLocalhost(), 3600, false);
         //保存到map中进行管理
         String username = request.getParameter("username");
         String email = request.getParameter("email");
@@ -45,7 +45,7 @@ public class SubjectUtils {
     public static void login(HttpServletResponse response, String email, String username) {
         String randomString = SubjectUtils.getRandomString();
         CookieUtils.addCookie(response, ConstantEum.LOGIN_TOKEN.getString(), randomString,
-                "localhost", 3600, false);
+                ConfigUtils.getLocalhost(), 3600, false);
         //保存到map中进行管理
         Map<Long, String> map = new LinkedHashMap<>();
         map.put(new Date().getTime(), randomString);

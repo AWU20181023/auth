@@ -27,6 +27,10 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
         HandlerMethod method = null;
         try {
             method = (HandlerMethod) handler;
@@ -86,6 +90,11 @@ public class AuthInterceptor implements HandlerInterceptor {
         } else {  //不需要登陆，直接return true
             return true;
         }
+    }
+
+    private boolean loginToNoPerms(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect(request.getContextPath() + "/noPerms");
+        return false;
     }
 
     private boolean loginToLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
