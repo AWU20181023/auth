@@ -17,5 +17,5 @@ public @interface Auth {
 
     boolean needLogin() default true;  //该类或者方法是否需要登陆，默认需要登陆
 
-    String[] permission() default "";  //拥有的权限
+    String[] permissions() default "";  //拥有的权限
 }
