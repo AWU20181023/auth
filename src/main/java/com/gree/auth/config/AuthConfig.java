@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Created by 260152(AWU) on 2018/10/27.
+ */
 @Configuration
 public class AuthConfig implements WebMvcConfigurer {
 
