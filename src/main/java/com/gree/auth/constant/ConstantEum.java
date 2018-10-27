@@ -11,7 +11,7 @@ public enum ConstantEum {
     TOKEN_TIMEOUT("1"),
     LOGINING("2"),
 
-    DELIMITER("******"),
+    DELIMITER("---"),
     ;
     private String string;
 
