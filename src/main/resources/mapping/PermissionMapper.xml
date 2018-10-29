@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gree.auth.dao.PermissionMapper">
+    <resultMap id="BaseResultMap" type="com.gree.auth.entity.po.Permission">
+        <id column="permission_id" property="permissionId" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="permission" property="permission" jdbcType="VARCHAR"/>
+        <result column="resource_type" property="resourceType" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        permission_id, is_delete, parent_id, permission, resource_type, url
+    </sql>
+    <select id="getAllPermissions" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_permission
+    </select>
+</mapper>

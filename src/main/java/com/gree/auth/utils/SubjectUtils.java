@@ -4,6 +4,7 @@ import com.gree.auth.constant.ConstantEum;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.annotation.ElementType;
 import java.util.*;
 
 /**
@@ -73,12 +74,14 @@ public class SubjectUtils {
      */
     public static String isLogin(String token) {
         if (token != null) {
-            if (isTimeout(token)) {
-                return ConstantEum.TOKEN_TIMEOUT.getString();
-            }
-            if (isLogging(token)) {
-                return ConstantEum.LOGINING.getString();
-            }
+            if (isExist(token)) {
+                if (isTimeout(token)) {
+                    return ConstantEum.TOKEN_TIMEOUT.getString();
+                }
+                if (isLogging(token)) {
+                    return ConstantEum.LOGINING.getString();
+                }
+            } else return ConstantEum.NO_LOGIN.getString();
         }
         return ConstantEum.NO_LOGIN.getString();
     }

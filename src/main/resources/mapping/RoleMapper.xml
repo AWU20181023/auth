@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gree.auth.dao.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.gree.auth.entity.po.Role">
+        <id column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="is_delete" property="isDelete"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="rolename" property="rolename" jdbcType="VARCHAR"/>
+        <result column="perms" property="perms" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        role_id, is_delete, description, rolename, perms
+    </sql>
+    <select id="getAllRole" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_role
+    </select>
+</mapper>

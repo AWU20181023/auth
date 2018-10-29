@@ -1,0 +1,22 @@
+package com.gree.auth.dao;
+
+import com.gree.auth.AuthApplicationTests;
+import com.gree.auth.entity.po.User;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
+/**
+ * Created by 260152(AWU) on 2018/10/29 15:54.
+ */
+public class UserMapperTest extends AuthApplicationTests {
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    public void testUserMapper() {
+        List<User> allUser = userMapper.getAllUser();
+        allUser.forEach(System.out::println);
+    }
+}
