@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gree.auth.dao.UserOperationMapper">
+    <resultMap id="BaseResultMap" type="com.gree.auth.entity.po.UserOperation">
+        <id column="user_operation_id" property="userOperationId" jdbcType="INTEGER"/>
+        <result column="department" property="department" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="operate_date" property="operateDate" jdbcType="TIMESTAMP"/>
+        <result column="operate_ip" property="operateIp" jdbcType="VARCHAR"/>
+        <result column="operate_method" property="operateMethod" jdbcType="VARCHAR"/>
+        <result column="operate_parms" property="operateParms" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        user_operation_id, department, email, operate_date, operate_ip, operate_method, operate_parms, username
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user_operation
+        where user_operation_id = #{userOperationId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_user_operation
+        where user_operation_id = #{userOperationId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.gree.auth.entity.po.UserOperation">
+        insert into t_user_operation (user_operation_id, department, email,
+        operate_date, operate_ip, operate_method,
+        operate_parms, username)
+        values (#{userOperationId}, #{department}, #{email},
+        #{operateDate}, #{operateIp}, #{operateMethod},
+        #{operateParms}, #{username})
+    </insert>
+    <insert id="insertSelective" parameterType="com.gree.auth.entity.po.UserOperation">
+        insert into t_user_operation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userOperationId != null">
+                user_operation_id,
+            </if>
+            <if test="department != null">
+                department,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="operateDate != null">
+                operate_date,
+            </if>
+            <if test="operateIp != null">
+                operate_ip,
+            </if>
+            <if test="operateMethod != null">
+                operate_method,
+            </if>
+            <if test="operateParms != null">
+                operate_parms,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userOperationId != null">
+                #{userOperationId},
+            </if>
+            <if test="department != null">
+                #{department},
+            </if>
+            <if test="email != null">
+                #{email},
+            </if>
+            <if test="operateDate != null">
+                #{operateDate},
+            </if>
+            <if test="operateIp != null">
+                #{operateIp},
+            </if>
+            <if test="operateMethod != null">
+                #{operateMethod},
+            </if>
+            <if test="operateParms != null">
+                #{operateParms},
+            </if>
+            <if test="username != null">
+                #{username},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gree.auth.entity.po.UserOperation">
+        update t_user_operation
+        <set>
+            <if test="department != null">
+                department = #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="operateDate != null">
+                operate_date = #{operateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operateIp != null">
+                operate_ip = #{operateIp,jdbcType=VARCHAR},
+            </if>
+            <if test="operateMethod != null">
+                operate_method = #{operateMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="operateParms != null">
+                operate_parms = #{operateParms,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_operation_id = #{userOperationId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gree.auth.entity.po.UserOperation">
+        update t_user_operation
+        set department = #{department,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        operate_date = #{operateDate,jdbcType=TIMESTAMP},
+        operate_ip = #{operateIp,jdbcType=VARCHAR},
+        operate_method = #{operateMethod,jdbcType=VARCHAR},
+        operate_parms = #{operateParms,jdbcType=VARCHAR},
+        username = #{username,jdbcType=VARCHAR}
+        where user_operation_id = #{userOperationId,jdbcType=INTEGER}
+    </update>
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user_operation
+        ORDER BY operate_date DESC
+    </select>
+    <select id="getCount" resultType="java.lang.Long">
+        SELECT COUNT(*) FROM t_user_operation
+    </select>
+</mapper>

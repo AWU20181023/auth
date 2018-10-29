@@ -23,15 +23,15 @@ DROP TABLE IF EXISTS `t_permission`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_permission` (
-  `syspermission_id` int(11) NOT NULL AUTO_INCREMENT,
+  `permission_id` int(11) NOT NULL AUTO_INCREMENT,
   `is_delete` bit(1) DEFAULT NULL,
   `name` varchar(25) DEFAULT NULL,
   `parent_id` bigint(20) DEFAULT NULL,
   `permission` varchar(50) DEFAULT NULL,
   `resource_type` varchar(50) DEFAULT NULL,
   `url` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`syspermission_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`permission_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +40,7 @@ CREATE TABLE `t_permission` (
 
 LOCK TABLES `t_permission` WRITE;
 /*!40000 ALTER TABLE `t_permission` DISABLE KEYS */;
+INSERT INTO `t_permission` VALUES (4,_binary '\0','删除用户',NULL,'user:delete',NULL,NULL);
 /*!40000 ALTER TABLE `t_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,13 +52,13 @@ DROP TABLE IF EXISTS `t_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `t_role` (
-  `sys_role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
   `is_delete` bit(1) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
-  `role` varchar(100) DEFAULT NULL,
+  `rolename` varchar(100) DEFAULT NULL,
   `perms` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`sys_role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`role_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +67,7 @@ CREATE TABLE `t_role` (
 
 LOCK TABLES `t_role` WRITE;
 /*!40000 ALTER TABLE `t_role` DISABLE KEYS */;
+INSERT INTO `t_role` VALUES (7,_binary '\0','admin','admin','4');
 /*!40000 ALTER TABLE `t_role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,7 +86,7 @@ CREATE TABLE `t_user` (
   `department` varchar(60) DEFAULT NULL,
   `roles` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`user_info_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,6 +95,7 @@ CREATE TABLE `t_user` (
 
 LOCK TABLES `t_user` WRITE;
 /*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
+INSERT INTO `t_user` VALUES (5,'260152','dafwea','awu','dbc','7');
 /*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -105,4 +108,17 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-29 14:41:21
+DROP TABLE IF EXISTS `t_user_operation`;
+CREATE TABLE `t_user_operation` (
+  `user_operation_id` int(11) NOT NULL AUTO_INCREMENT,
+  `department` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `operate_date` datetime DEFAULT NULL,
+  `operate_ip` varchar(255) DEFAULT NULL,
+  `operate_method` varchar(255) DEFAULT NULL,
+  `operate_parms` varchar(512) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_operation_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- Dump completed on 2018-10-29 18:26:54
