@@ -175,4 +175,10 @@ public class SubjectUtils {
     private static String getRandomString() {
         return (UUID.randomUUID().toString() + UUID.randomUUID().toString()).replace("-", "");
     }
+
+    /**
+     * todo 清除失效的token
+     */
+    private static void clearTimeoutToken() {
+    }
 }

@@ -11,6 +11,10 @@ public enum ConstantEum {
     TOKEN_TIMEOUT("1"),
     LOGINING("2"),
 
+    NO_PERMS("0"),
+    IS_THROUGH("1"),
+    NO_REGISTER("2"),
+
     DELIMITER("---"),
     ;
     private String string;

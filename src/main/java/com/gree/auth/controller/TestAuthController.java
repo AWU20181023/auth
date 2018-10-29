@@ -1,6 +1,8 @@
 package com.gree.auth.controller;
 
 import com.gree.auth.annotation.Auth;
+import com.gree.auth.entity.dto.Result;
+import com.gree.auth.utils.ConfigUtils;
 import com.gree.auth.utils.SubjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,27 +21,45 @@ public class TestAuthController {
 
     @Auth(permissions = {"aa", "bb"})
     @GetMapping("testAuth")
-    public String testAuth() {
-        return "恭喜你，看到了我";
+    public Result testAuth() {
+        return Result.success("恭喜你，看到了我", null);
     }
 
     @Auth(permissions = {"ee", "ff"}, needLogin = false)
     @GetMapping("testAuth2")
-    public String testAuth2() {
-        return "恭喜你，看到了我2";
+    public Result testAuth2() {
+        return Result.success("恭喜你，看到了我2", null);
     }
 
     @Auth(needLogin = false)
     @GetMapping("login")
-    public String login(HttpServletResponse response) {
+    public Result login(HttpServletResponse response) {
         SubjectUtils.login(response, "260152", "AWU");
-        return "恭喜你，登陆了";
+        return Result.success("恭喜你，登陆成功", null);
     }
 
     @Auth(needLogin = false)
     @GetMapping("logout")
-    public String logout(HttpServletResponse response, HttpServletRequest request) {
+    public Result logout(HttpServletResponse response, HttpServletRequest request) {
         SubjectUtils.logout(response, request, "260152", "AWU");
-        return "恭喜你，退出了";
+        return Result.success("登出系统成功", null);
+    }
+
+    @Auth(needLogin = false)
+    @GetMapping("noRegister")
+    public Result noRegister() {
+        return Result.fail("您还未注册", null);
+    }
+
+    @Auth(needLogin = false)
+    @GetMapping("noPerms")
+    public Result noPerms() {
+        return Result.fail("您没有操作权限", null);
+    }
+
+    @Auth(needLogin = false)
+    @GetMapping("timeout")
+    public Result timeout() {
+        return Result.fail("您长时间未操作，已为您做下线处理", null);
     }
 }
