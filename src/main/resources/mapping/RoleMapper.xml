@@ -16,4 +16,10 @@
         <include refid="Base_Column_List"/>
         from t_role
     </select>
+    <select id="getRoleById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_role
+        where role_id = #{role}
+    </select>
 </mapper>

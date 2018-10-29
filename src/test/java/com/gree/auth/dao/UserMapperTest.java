@@ -19,4 +19,10 @@ public class UserMapperTest extends AuthApplicationTests {
         List<User> allUser = userMapper.getAllUser();
         allUser.forEach(System.out::println);
     }
+
+    @Test
+    public void testGetByCondition() {
+        User awu = userMapper.getByEmailAndUsername("260152", "awu");
+        System.out.println(awu);
+    }
 }

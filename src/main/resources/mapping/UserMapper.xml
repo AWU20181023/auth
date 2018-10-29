@@ -17,4 +17,11 @@
         <include refid="Base_Column_List"/>
         from t_user
     </select>
+    <select id="getByEmailAndUsername" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_user
+        where email = #{email}
+        and username = #{username}
+    </select>
 </mapper>

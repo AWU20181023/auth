@@ -17,4 +17,10 @@
         <include refid="Base_Column_List"/>
         from t_permission
     </select>
+    <select id="getPermsById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_permission
+        where permission_id = #{perm}
+    </select>
 </mapper>
