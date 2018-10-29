@@ -14,18 +14,17 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by 260152(AWU) on 2018/10/27.
  */
-@Auth(permissions = {"cc", "dd"})
 @RestController
 @RequestMapping("auth")
 public class TestAuthController {
 
-    @Auth(permissions = {"aa", "bb"})
+    @Auth(permissions = {"user:delete"})
     @GetMapping("testAuth")
     public Result testAuth() {
         return Result.success("恭喜你，看到了我", null);
     }
 
-    @Auth(permissions = {"ee", "ff"}, needLogin = false)
+    @Auth(needLogin = false)
     @GetMapping("testAuth2")
     public Result testAuth2() {
         return Result.success("恭喜你，看到了我2", null);
@@ -34,7 +33,7 @@ public class TestAuthController {
     @Auth(needLogin = false)
     @GetMapping("login")
     public Result login(HttpServletResponse response) {
-        SubjectUtils.login(response, "260152", "AWU");
+        SubjectUtils.login(response, "260152", "awu");
         return Result.success("恭喜你，登陆成功", null);
     }
 
