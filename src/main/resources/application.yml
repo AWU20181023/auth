@@ -49,4 +49,4 @@ pagehelper:
 
 #AUTH THE IDENTITY：cookie or token
 auth:
-  method: cookie
+  method: token

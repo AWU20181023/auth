@@ -78,7 +78,7 @@ public class SubjectUtils {
     private static void execMap(String email, String username, String randomString) {
         //保存到map中进行管理
         Map<Long, String> map = new LinkedHashMap<>();
-        map.put(new Date().getTime(), randomString);
+        map.put(System.currentTimeMillis(), randomString);
         tokenMap.put(email + ConstantEum.DELIMITER.getString() + username, map);
     }
 
@@ -125,7 +125,7 @@ public class SubjectUtils {
                                     String value1 = longStringEntry.getValue();
                                     if (token.equals(value1)) {
                                         Long key = longStringEntry.getKey();
-                                        if (new Date().getTime() - key <= timeout) {
+                                        if (System.currentTimeMillis() - key <= timeout) {
                                             return false;
                                         }
                                     }
@@ -142,8 +142,13 @@ public class SubjectUtils {
     private static void refreshToken(String token) {
         if (token != null) {
             if (isExist(token)) {
-                Map<Long, String> map = tokenMap.get(getEmail(token) + ConstantEum.DELIMITER.getString() + getUsername(token));
-                map.put(new Date().getTime(), token);
+                String key = getEmail(token) + ConstantEum.DELIMITER.getString() + getUsername(token);
+                Map<Long, String> map = tokenMap.get(key);
+                if (map != null) {
+                    map = new LinkedHashMap<>();
+                    map.put(System.currentTimeMillis(), token);
+                    tokenMap.replace(key, map);
+                }
             }
         }
     }

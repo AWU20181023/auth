@@ -50,7 +50,7 @@ public class TestAuthController {
     @Auth(needLogin = false)
     @GetMapping("logout")
     public Result logout(HttpServletResponse response, HttpServletRequest request) {
-        SubjectUtils.logout(response, request, "260152", "AWU");
+        SubjectUtils.logout(response, request, "260152", "awu");
         return Result.success("登出系统成功", null);
     }
 }

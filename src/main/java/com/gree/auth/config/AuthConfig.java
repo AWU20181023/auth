@@ -13,6 +13,10 @@ public class AuthConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new AuthInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(new AuthInterceptor()).addPathPatterns("/**")
+                .excludePathPatterns("/swagger-ui.html")
+                .excludePathPatterns("/swagger-resources")
+                .excludePathPatterns("/v2/api-docs")
+                .excludePathPatterns("/webjars/springfox-swagger-ui/**");
     }
 }
