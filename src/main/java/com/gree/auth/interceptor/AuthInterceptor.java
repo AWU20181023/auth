@@ -1,5 +1,6 @@
 package com.gree.auth.interceptor;
 
+import com.alibaba.fastjson.JSON;
 import com.gree.auth.annotation.Auth;
 import com.gree.auth.constant.ConstantEum;
 import com.gree.auth.service.UserService;
@@ -13,9 +14,11 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by 260152(AWU) on 2018/10/27.
@@ -122,24 +125,40 @@ public class AuthInterceptor implements HandlerInterceptor {
     }
 
     private boolean loginToNoRegister(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() + "/auth/noRegister");
+//        response.sendRedirect(request.getContextPath() + "/auth/noRegister");
+        returnJson(response, "您还未注册");
         return false;
     }
 
     private boolean loginToNoPerms(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() + "/auth/noPerms");
+//        response.sendRedirect(request.getContextPath() + "/auth/noPerms");
+        returnJson(response, "您没有操作权限");
         return false;
     }
 
 
     private boolean loginToLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() + "/auth/login");
+//        response.sendRedirect(request.getContextPath() + "/auth/login");
+        returnJson(response, "您还未注册");
         return false;
     }
 
     private boolean loginToTimeout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.sendRedirect(request.getContextPath() + "/auth/timeout");
+//        response.sendRedirect(request.getContextPath() + "/auth/timeout");
+        returnJson(response, "您长时间未操作，已为您做下线处理");
         return false;
+    }
+
+    private void returnJson(HttpServletResponse response, Object object) {
+        // 控制浏览器用utf8打开
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=utf-8");
+        try (ServletOutputStream writer = response.getOutputStream()) {
+            // 用utf-8输出
+            writer.write(JSON.toJSONString(object).getBytes(StandardCharsets.UTF_8));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
