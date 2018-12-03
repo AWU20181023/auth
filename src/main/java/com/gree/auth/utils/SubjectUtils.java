@@ -197,6 +197,19 @@ public class SubjectUtils {
     /**
      * todo 清除失效的token
      */
-    private static void clearTimeoutToken() {
+    public static void clearTimeoutToken() {
+        if (tokenMap != null) {
+            List<String> tokenList = new LinkedList<>();
+            long currentTimeStamp = DateUtils.getBeforeTimeByHour(new Date(), 24D).getTime();
+            // 清除小于currentTimeStamp的token
+            tokenMap.forEach((k, v) -> v.forEach((k2, v2) -> {
+                if (k2 < currentTimeStamp) {
+                    tokenList.add(k);
+                }
+            }));
+            if (tokenList.size() > 0) {
+                tokenList.forEach(tokenMap::remove);
+            }
+        }
     }
 }
