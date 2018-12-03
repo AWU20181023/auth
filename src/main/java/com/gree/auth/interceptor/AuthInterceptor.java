@@ -3,6 +3,7 @@ package com.gree.auth.interceptor;
 import com.alibaba.fastjson.JSON;
 import com.gree.auth.annotation.Auth;
 import com.gree.auth.constant.ConstantEum;
+import com.gree.auth.entity.dto.Result;
 import com.gree.auth.service.UserService;
 import com.gree.auth.utils.CookieUtils;
 import com.gree.auth.utils.SubjectUtils;
@@ -125,27 +126,23 @@ public class AuthInterceptor implements HandlerInterceptor {
     }
 
     private boolean loginToNoRegister(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        response.sendRedirect(request.getContextPath() + "/auth/noRegister");
-        returnJson(response, "您还未注册");
+        returnJson(response, Result.fail(ConstantEum.AUTH_NO_REGISTER, "您还未注册", null));
         return false;
     }
 
     private boolean loginToNoPerms(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        response.sendRedirect(request.getContextPath() + "/auth/noPerms");
-        returnJson(response, "您没有操作权限");
+        returnJson(response, Result.fail(ConstantEum.AUTH_NO_PERMS, "您没有操作权限", null));
         return false;
     }
 
 
     private boolean loginToLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        response.sendRedirect(request.getContextPath() + "/auth/login");
-        returnJson(response, "您还未注册");
+        returnJson(response, Result.fail(ConstantEum.AUTH_NO_LOGIN, "您还未登陆", null));
         return false;
     }
 
     private boolean loginToTimeout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//        response.sendRedirect(request.getContextPath() + "/auth/timeout");
-        returnJson(response, "您长时间未操作，已为您做下线处理");
+        returnJson(response, Result.fail(ConstantEum.AUTH_TIME_OUT, "您长时间未操作，已为您做下线处理", null));
         return false;
     }
 

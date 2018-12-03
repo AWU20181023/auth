@@ -1,5 +1,7 @@
 package com.gree.auth.entity.dto;
 
+import com.gree.auth.constant.ConstantEum;
+
 /**
  * Created by 260152(AWU) on 2018/10/29 11:18.
  */
@@ -18,15 +20,19 @@ public class Result {
     }
 
     public static Result success(Object data) {
-        return new Result(1, "success", data);
+        return new Result(ConstantEum.OPREATE_SUCCESS.getInteger(), "success", data);
     }
 
     public static Result success(String msg, Object data) {
-        return new Result(1, msg, data);
+        return new Result(ConstantEum.OPREATE_SUCCESS.getInteger(), msg, data);
     }
 
     public static Result fail(String msg, Object data) {
-        return new Result(0, msg, data);
+        return new Result(ConstantEum.OPERATE_FAIL.getInteger(), msg, data);
+    }
+
+    public static Result fail(ConstantEum constantEum, String msg, Object data) {
+        return new Result(constantEum.getInteger(), msg, data);
     }
 
     public Integer getCode() {
