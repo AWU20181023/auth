@@ -6,36 +6,36 @@ spring:
   datasource:
     name: auth
     type: com.alibaba.druid.pool.DruidDataSource
-    #druidÏà¹ØÅäÖÃ
+    #druidï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     druid:
-      #¼à¿ØÍ³¼ÆÀ¹½ØµÄfilters
+      #ï¿½ï¿½ï¿½Í³ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½filters
       filters: stat
       driver-class-name: com.mysql.jdbc.Driver
-      #»ù±¾ÊôĞÔ
+      #ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       url: jdbc:mysql://**:3306/auth?useUnicode=true&characterEncoding=UTF-8&useSSL=false
       username: **
       password: **
-      #ÅäÖÃ³õÊ¼»¯´óĞ¡/×îĞ¡/×î´ó
+      #ï¿½ï¿½ï¿½Ã³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ğ¡/ï¿½ï¿½Ğ¡/ï¿½ï¿½ï¿½
       initial-size: 1
       min-idle: 1
       max-active: 20
-      #»ñÈ¡Á¬½ÓµÈ´ı³¬Ê±Ê±¼ä
+      #ï¿½ï¿½È¡ï¿½ï¿½ï¿½ÓµÈ´ï¿½ï¿½ï¿½Ê±Ê±ï¿½ï¿½
       max-wait: 60000
-      #¼ä¸ô¶à¾Ã½øĞĞÒ»´Î¼ì²â£¬¼ì²âĞèÒª¹Ø±ÕµÄ¿ÕÏĞÁ¬½Ó
+      #ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½Ò»ï¿½Î¼ï¿½â£¬ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ø±ÕµÄ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
       time-between-eviction-runs-millis: 60000
-      #Ò»¸öÁ¬½ÓÔÚ³ØÖĞ×îĞ¡Éú´æµÄÊ±¼ä
+      #Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú³ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
       min-evictable-idle-time-millis: 300000
       validation-query: SELECT 'x'
       test-while-idle: true
       test-on-borrow: false
       test-on-return: false
-      #´ò¿ªPSCache£¬²¢Ö¸¶¨Ã¿¸öÁ¬½ÓÉÏPSCacheµÄ´óĞ¡¡£oracleÉèÎªtrue£¬mysqlÉèÎªfalse¡£·Ö¿â·Ö±í½Ï¶àÍÆ¼öÉèÖÃÎªfalse
+      #ï¿½ï¿½PSCacheï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½PSCacheï¿½Ä´ï¿½Ğ¡ï¿½ï¿½oracleï¿½ï¿½Îªtrueï¿½ï¿½mysqlï¿½ï¿½Îªfalseï¿½ï¿½ï¿½Ö¿ï¿½Ö±ï¿½Ï¶ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ï¿½Îªfalse
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
-## ¸ÃÅäÖÃ½ÚµãÎª¶ÀÁ¢µÄ½Úµã£¬ÓĞºÜ¶àÍ¬Ñ§ÈİÒ×½«Õâ¸öÅäÖÃ·ÅÔÚspringµÄ½ÚµãÏÂ£¬µ¼ÖÂÅäÖÃÎŞ·¨±»Ê¶±ğ
+## ï¿½ï¿½ï¿½ï¿½ï¿½Ã½Úµï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ä½Úµã£¬ï¿½ĞºÜ¶ï¿½Í¬Ñ§ï¿½ï¿½ï¿½×½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½springï¿½Ä½Úµï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş·ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
 mybatis:
-  mapper-locations: classpath:mapping/*.xml  #×¢Òâ£ºÒ»¶¨Òª¶ÔÓ¦mapperÓ³ÉäxmlÎÄ¼şµÄËùÔÚÂ·¾¶
-  type-aliases-package: com.gree.auth.entity.po # ×¢Òâ£º¶ÔÓ¦ÊµÌåÀàµÄÂ·¾¶
+  mapper-locations: classpath:mapping/*.xml  #×¢ï¿½â£ºÒ»ï¿½ï¿½Òªï¿½ï¿½Ó¦mapperÓ³ï¿½ï¿½xmlï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+  type-aliases-package: com.gree.auth.entity.po # ×¢ï¿½â£ºï¿½ï¿½Ó¦Êµï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
   configuration:
     map-underscore-to-camel-case: true
 
@@ -46,3 +46,7 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
   returnPageInfo: check
+
+#AUTH THE IDENTITYï¼šcookie or token
+auth:
+  method: cookie

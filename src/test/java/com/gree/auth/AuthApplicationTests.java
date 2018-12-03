@@ -24,7 +24,6 @@ public class AuthApplicationTests {
         for (Class<? extends UserService> monitor : monitorClasses) {
             try {
                 UserService userService = monitor.newInstance();
-                System.out.println(userService.isOK(null, null));
             } catch (Exception e) {
                 e.printStackTrace();
             }

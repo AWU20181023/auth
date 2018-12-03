@@ -6,10 +6,14 @@ package com.gree.auth.constant;
 public enum ConstantEum {
 
     LOGIN_TOKEN("LOGIN_TOKEN"),
+    AUTH_METHOD("AUTH_METHOD"),
 
     NO_LOGIN("0"),
     TOKEN_TIMEOUT("1"),
     LOGINING("2"),
+
+    USE_COOKIE(0),
+    USE_TOKEN(1),
 
     NO_PERMS("0"),
     IS_THROUGH("1"),

@@ -4,7 +4,6 @@ import com.gree.auth.constant.ConstantEum;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.annotation.ElementType;
 import java.util.*;
 
 /**
@@ -31,40 +30,56 @@ public class SubjectUtils {
         } else return null;
     }
 
-    public static void login(HttpServletResponse response, HttpServletRequest request) {
-        String randomString = SubjectUtils.getRandomString();
-        CookieUtils.addCookie(response, ConstantEum.LOGIN_TOKEN.getString(), randomString,
-                ConfigUtils.getLocalhost(), 3600, false);
-        //保存到map中进行管理
+    public static String login(HttpServletResponse response, HttpServletRequest request) {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
-        Map<Long, String> map = new LinkedHashMap<>();
-        map.put(new Date().getTime(), randomString);
-        tokenMap.put(email + ConstantEum.DELIMITER.getString() + username, map);
+        return getAuthString(response, username, email);
     }
 
-    public static void login(HttpServletResponse response, String email, String username) {
-        String randomString = SubjectUtils.getRandomString();
-        CookieUtils.addCookie(response, ConstantEum.LOGIN_TOKEN.getString(), randomString,
-                ConfigUtils.getLocalhost(), 3600, false);
-        //保存到map中进行管理
-        Map<Long, String> map = new LinkedHashMap<>();
-        map.put(new Date().getTime(), randomString);
-        tokenMap.put(email + ConstantEum.DELIMITER.getString() + username, map);
+    public static String login(HttpServletResponse response, String email, String username) {
+        return getAuthString(response, username, email);
     }
 
     public static void logout(HttpServletResponse response, HttpServletRequest request) {
         //从map中清除
         String username = request.getParameter("username");
         String email = request.getParameter("email");
-        CookieUtils.deleteCookie(request, response, ConstantEum.LOGIN_TOKEN.getString());
         tokenMap.remove(email + ConstantEum.DELIMITER.getString() + username);
+        Integer authMethod = AuthMethodUtils.getAuthMethod();
+        if (ConstantEum.USE_COOKIE.getInteger().equals(authMethod)) {
+            CookieUtils.deleteCookie(request, response, ConstantEum.LOGIN_TOKEN.getString());
+        }
     }
 
     public static void logout(HttpServletResponse response, HttpServletRequest request, String email, String username) {
         //从map中清除
         tokenMap.remove(email + ConstantEum.DELIMITER.getString() + username);
-        CookieUtils.deleteCookie(request, response, ConstantEum.LOGIN_TOKEN.getString());
+        Integer authMethod = AuthMethodUtils.getAuthMethod();
+        if (ConstantEum.USE_COOKIE.getInteger().equals(authMethod)) {
+            CookieUtils.deleteCookie(request, response, ConstantEum.LOGIN_TOKEN.getString());
+        }
+    }
+
+    private static String getAuthString(HttpServletResponse response, String username, String email) {
+        String randomString = SubjectUtils.getRandomString();
+        Integer authMethod = AuthMethodUtils.getAuthMethod();
+        if (ConstantEum.USE_COOKIE.getInteger().equals(authMethod)) {
+            CookieUtils.addCookie(response, ConstantEum.LOGIN_TOKEN.getString(), randomString,
+                    ConfigUtils.getLocalhost(), 3600, false);
+            //保存到map中进行管理
+            execMap(email, username, randomString);
+            return null;
+        } else {
+            execMap(email, username, randomString);
+            return randomString;
+        }
+    }
+
+    private static void execMap(String email, String username, String randomString) {
+        //保存到map中进行管理
+        Map<Long, String> map = new LinkedHashMap<>();
+        map.put(new Date().getTime(), randomString);
+        tokenMap.put(email + ConstantEum.DELIMITER.getString() + username, map);
     }
 
     /**
