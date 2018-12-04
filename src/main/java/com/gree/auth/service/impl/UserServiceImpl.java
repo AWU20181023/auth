@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,6 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
+    private Map<String, User> userMap = new ConcurrentHashMap<>();
 
     @Override
     public User getByEmailAndUsername(String email, String username) {
@@ -33,4 +36,30 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public User getPermsByEmail(String email, String username) {
+        if (email != null) {
+            User user = userMap.get(email);
+            if (user != null) {
+                return user;
+            } else {
+                User permByEmail = userMapper.getPermByEmail(email, username);
+                userMap.put(email, permByEmail);
+                return permByEmail;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    // TODO: 2018/12/4 更新操作记得清除
+    @Override
+    public void clearDataByEmail(String email) {
+        User user = userMap.get(email);
+        if (user != null) {
+            userMap.remove(email);
+        }
+    }
+
 }

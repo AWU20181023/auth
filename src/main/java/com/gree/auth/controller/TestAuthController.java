@@ -18,10 +18,10 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("auth")
-@Api(value = "权限测试",description = "测试权限")
+@Api(value = "权限测试", description = "测试权限")
 public class TestAuthController {
 
-    @Auth(permissions = {"user:delete"})
+    @Auth(permissions = {"admin:delete"})
     @GetMapping("testAuth")
     public Result testAuth() {
         return Result.success("恭喜你，看到了我", null);

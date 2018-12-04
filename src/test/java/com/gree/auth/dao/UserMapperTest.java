@@ -29,7 +29,7 @@ public class UserMapperTest extends AuthApplicationTests {
 
     @Test
     public void testGetPermByEmail() {
-        User permByEmail = userMapper.getPermByEmail("260152");
+        User permByEmail = userMapper.getPermByEmail("260152","awu");
         System.out.println(permByEmail);
     }
 }

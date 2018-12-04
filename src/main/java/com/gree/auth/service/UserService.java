@@ -7,4 +7,8 @@ import com.gree.auth.entity.po.User;
  */
 public interface UserService {
     User getByEmailAndUsername(String email, String username);
+
+    User getPermsByEmail(String email, String username);
+
+    void clearDataByEmail(String email);
 }

@@ -40,12 +40,12 @@
     </select>
     <select id="getPermByEmail" resultMap="BaseResultMap">
         select
-        *
+        t_user.*,t_role.*,t_permission.permission
         from t_user,t_user_role,t_role,t_role_perm,t_permission
         where t_user.user_id=t_user_role.user_id and t_user_role.role_id=t_role.role_id
         and t_role.role_id=t_role_perm.role_id and t_permission.perm_id=t_role_perm.perm_id
         and t_role.deleted=0 and t_permission.deleted=0
-        and t_user.email=#{email}
+        and t_user.email=#{email} and username = #{username}
     </select>
     <select id="getByEmailAndUsername" resultMap="BaseResultMap">
         select

@@ -13,5 +13,5 @@ public interface UserMapper {
 
     User getByEmailAndUsername(@Param("email") String email, @Param("username") String username);
 
-    User getPermByEmail(@Param("email") String email);
+    User getPermByEmail(@Param("email") String email, @Param("username") String username);
 }
