@@ -1,8 +1,6 @@
 package com.gree.auth.utils;
 
-import com.gree.auth.annotation.Auth;
 import com.gree.auth.constant.ConstantEum;
-import com.gree.auth.interceptor.AuthInterceptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +11,9 @@ import java.util.Map;
  * Created by 260152(AWU) on 2018/12/3 15:24.
  */
 @Component
-public class AuthMethodUtils {
-    private AuthMethodUtils() {
+public class AuthUtils {
+
+    private AuthUtils() {
     }
 
     private static String authMethod;
@@ -22,7 +21,7 @@ public class AuthMethodUtils {
 
     @Value("${auth.method}")
     public void setAuthMethod(String authMethod) {
-        AuthMethodUtils.authMethod = authMethod;
+        AuthUtils.authMethod = authMethod;
     }
 
     public static Integer getAuthMethod() {

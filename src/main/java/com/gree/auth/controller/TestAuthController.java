@@ -1,12 +1,9 @@
 package com.gree.auth.controller;
 
 import com.gree.auth.annotation.Auth;
-import com.gree.auth.constant.ConstantEum;
 import com.gree.auth.entity.dto.Result;
-import com.gree.auth.utils.AuthMethodUtils;
-import com.gree.auth.utils.ConfigUtils;
 import com.gree.auth.utils.SubjectUtils;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +18,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("auth")
+@Api(value = "权限测试",description = "测试权限")
 public class TestAuthController {
 
     @Auth(permissions = {"user:delete"})

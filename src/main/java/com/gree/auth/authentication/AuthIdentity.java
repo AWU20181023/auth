@@ -35,27 +35,27 @@ public class AuthIdentity {
             String email = SubjectUtils.getEmail(token);
             User emailAndUsername = userMapper.getByEmailAndUsername(email, username);
             if (emailAndUsername != null) {
-                String roles = emailAndUsername.getRoles();
-                if (roles != null && roles.length() > 0) {
-                    String[] split = roles.split(";");
-                    if (split.length > 0) {
-                        for (String role : split) {
-                            Role role1 = roleMapper.getRoleById(role);
-                            String perms1 = role1.getPerms();
-                            if (perms1.length() > 0) {
-                                String[] split1 = perms1.split(";");
-                                if (split1.length > 0) {
-                                    for (String perm : split1) {
-                                        Permission permission = permissionMapper.getPermsById(perm);
-                                        if (permission != null) {
-                                            permList.add(permission.getPermission());
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+//                String roles = emailAndUsername.getRoles();
+//                if (roles != null && roles.length() > 0) {
+//                    String[] split = roles.split(";");
+//                    if (split.length > 0) {
+//                        for (String role : split) {
+//                            Role role1 = roleMapper.getRoleById(role);
+//                            String perms1 = role1.getPerms();
+//                            if (perms1.length() > 0) {
+//                                String[] split1 = perms1.split(";");
+//                                if (split1.length > 0) {
+//                                    for (String perm : split1) {
+//                                        Permission permission = permissionMapper.getPermsById(perm);
+//                                        if (permission != null) {
+//                                            permList.add(permission.getPermission());
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
                 if (hasPerms(perms, permList)) {
                     return ConstantEum.IS_THROUGH.getString();
                 } else return ConstantEum.NO_PERMS.getString();

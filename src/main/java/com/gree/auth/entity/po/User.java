@@ -1,22 +1,42 @@
 package com.gree.auth.entity.po;
 
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by 260152(AWU) on 2018/10/29 11:24.
  */
 public class User {
-    private Integer userInfoId;
+    private Integer userId;
     private String email;
     private String salt;
     private String username;
     private String department;
-    private String roles;
+    private Date createdDate;
+    private Date updatedDate;
+    private List<Role> roleList = new LinkedList<>();
 
-    public Integer getUserInfoId() {
-        return userInfoId;
+    public User() {
     }
 
-    public void setUserInfoId(Integer userInfoId) {
-        this.userInfoId = userInfoId;
+    public User(Integer userId, String email, String salt, String username, String department, Date createdDate, Date updatedDate, List<Role> roleList) {
+        this.userId = userId;
+        this.email = email;
+        this.salt = salt;
+        this.username = username;
+        this.department = department;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
+        this.roleList = roleList;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -51,23 +71,41 @@ public class User {
         this.department = department;
     }
 
-    public String getRoles() {
-        return roles;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Date updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userInfoId=" + userInfoId +
+                "userId=" + userId +
                 ", email='" + email + '\'' +
                 ", salt='" + salt + '\'' +
                 ", username='" + username + '\'' +
                 ", department='" + department + '\'' +
-                ", roles='" + roles + '\'' +
+                ", createdDate=" + createdDate +
+                ", updatedDate=" + updatedDate +
+                ", roleList=" + roleList +
                 '}';
     }
 }

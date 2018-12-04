@@ -3,13 +3,26 @@
 <mapper namespace="com.gree.auth.dao.RoleMapper">
     <resultMap id="BaseResultMap" type="com.gree.auth.entity.po.Role">
         <id column="role_id" property="roleId" jdbcType="INTEGER"/>
-        <result column="is_delete" property="isDelete"/>
+        <result column="deleted" property="deleted" jdbcType="BIT"/>
         <result column="description" property="description" jdbcType="VARCHAR"/>
         <result column="rolename" property="rolename" jdbcType="VARCHAR"/>
-        <result column="perms" property="perms" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
+        <collection property="permissionList" ofType="com.gree.auth.entity.po.Permission">
+            <id column="perm_id" property="permId" jdbcType="INTEGER"/>
+            <result column="deleted" property="deleted" jdbcType="BIT"/>
+            <result column="name" property="name" jdbcType="VARCHAR"/>
+            <result column="parent_id" property="parentId" jdbcType="FLOAT"/>
+            <result column="permission" property="permission" jdbcType="VARCHAR"/>
+            <result column="resource_type" property="resourceType" jdbcType="VARCHAR"/>
+            <result column="url" property="url" jdbcType="VARCHAR"/>
+            <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+            <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
+        </collection>
     </resultMap>
     <sql id="Base_Column_List">
-        role_id, is_delete, description, rolename, perms
+        role_id, deleted, description, rolename, parent_id
     </sql>
     <select id="getAllRole" resultMap="BaseResultMap">
         select

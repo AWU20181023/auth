@@ -3,6 +3,7 @@ package com.gree.auth.dao;
 import com.gree.auth.AuthApplicationTests;
 import com.gree.auth.entity.po.User;
 import org.junit.Test;
+import org.junit.validator.PublicClassValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -24,5 +25,11 @@ public class UserMapperTest extends AuthApplicationTests {
     public void testGetByCondition() {
         User awu = userMapper.getByEmailAndUsername("260152", "awu");
         System.out.println(awu);
+    }
+
+    @Test
+    public void testGetPermByEmail() {
+        User permByEmail = userMapper.getPermByEmail("260152");
+        System.out.println(permByEmail);
     }
 }

@@ -5,13 +5,12 @@ import com.gree.auth.annotation.Auth;
 import com.gree.auth.authentication.AuthIdentity;
 import com.gree.auth.constant.ConstantEum;
 import com.gree.auth.entity.dto.Result;
-import com.gree.auth.utils.AuthMethodUtils;
+import com.gree.auth.utils.AuthUtils;
 import com.gree.auth.utils.CookieUtils;
 import com.gree.auth.utils.SubjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -87,7 +86,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             if (auth.needLogin()) {  //需要登陆
                 // 1.判断是否登陆，未登录的进行登陆，已经登陆的进行权限判断
                 String token = null;
-                Integer authMethod = AuthMethodUtils.getAuthMethod();
+                Integer authMethod = AuthUtils.getAuthMethod();
                 if (ConstantEum.USE_COOKIE.getInteger().equals(authMethod)) {
                     // 使用cookie登陆时
                     token = CookieUtils.getValue(request, ConstantEum.LOGIN_TOKEN.getString());

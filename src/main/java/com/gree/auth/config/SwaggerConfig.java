@@ -2,7 +2,7 @@ package com.gree.auth.config;
 
 import com.google.common.base.Predicates;
 import com.gree.auth.constant.ConstantEum;
-import com.gree.auth.utils.AuthMethodUtils;
+import com.gree.auth.utils.AuthUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -35,7 +35,7 @@ public class SwaggerConfig {
                 .build()
                 .apiInfo(apiInfo());
 
-        Integer authMethod = AuthMethodUtils.getAuthMethod();
+        Integer authMethod = AuthUtils.getAuthMethod();
         if (!ConstantEum.USE_COOKIE.getInteger().equals(authMethod)) {
             ParameterBuilder parameterBuilder = new ParameterBuilder();
             List<Parameter> parameters = new ArrayList<>();

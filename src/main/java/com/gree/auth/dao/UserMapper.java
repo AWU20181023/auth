@@ -12,4 +12,6 @@ public interface UserMapper {
     List<User> getAllUser();
 
     User getByEmailAndUsername(@Param("email") String email, @Param("username") String username);
+
+    User getPermByEmail(@Param("email") String email);
 }
